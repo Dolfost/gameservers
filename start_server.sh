@@ -5,7 +5,7 @@
 # $root/$conf_dir/$cluster
 root="$HOME/dstservers"
 conf_dir="clusters" 
-cluster="cdefault"
+cluster="dcluster"
 shard="Master"
 additional=("-console")
 # additional=("-offline -disabledatacollection -console")
