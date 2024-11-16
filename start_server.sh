@@ -38,15 +38,15 @@ USAGE: $0 [OPTIONS]
 
 Available options:
 -c --cluster [CLUSTER PATH]    Cluster name to run.
-	 default: $cluster
+   default: $cluster
 -s --shard [SHARD PATH]        Shard to start (Caves, Master etc.).
-	 default: $shard
+   default: $shard
 -r --root [PATH]               Path to the clusters directory.
-	 default: $root
+   default: $root
 -o --server-option [OPTIONS]   Additional nullrenderer options.
-	 default: $additional
+   default: $additional
 -d --config-dif [PATH]         Clusters home directory.
-	 default: $conf_dir
+   default: $conf_dir
 -h --help                      Show this message.
 
 Clusters are in <root>/<config-directory>/
