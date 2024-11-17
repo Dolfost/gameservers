@@ -88,10 +88,8 @@ Avaliable options:
     default: $maxHeap
  -h --help                      Show this message.
 
-Running sever is in <servers-directory>/<server>
-
-Sever of version <server-version> is at <jars-directory>
-It is found according to this regular expression: *<server-version>.jar
+Running sever is in <servers-directory>/<server>.
+Sever is at <jars-directory>/<server-jar>.
 EOF
                         exit 0
                         ;;
