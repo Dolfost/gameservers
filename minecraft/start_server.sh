@@ -8,7 +8,7 @@ jarsDirectory="serverjars"
 jarOptions="nogui"
 javaOptions=""
 startHeap="512"
-allowedHeap="1024"
+maxHeap="1024"
 
 programName="$0"
 
