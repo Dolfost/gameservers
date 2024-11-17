@@ -24,7 +24,7 @@ function check_for_file() {
 }
 
 function check_uint() {
-	if [[ ! $1 =~ ^-?[0-9]+$ ]]; then
+	if [[ ! $1 =~ ^[0-9]+$ ]]; then
 		fail "$2: not an positive integer"
 	fi
 }
