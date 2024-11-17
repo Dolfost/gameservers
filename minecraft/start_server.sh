@@ -3,7 +3,7 @@
 serversDirectory="servers"
 server="dserver"
 
-serverVersion="1.21.3"
+serverJar="minecraft_1.21.3"
 jarsDirectory="serverjars"
 jarOptions="nogui"
 javaOptions=""
@@ -19,7 +19,7 @@ function fail() {
 
 function check_for_file() {
     if [ ! -e "$1" ]; then
-        fail "Missing file: $1"
+        fail "Missing file: $1: $2"
     fi
 }
 
@@ -35,8 +35,8 @@ while [[ $# -gt 0 ]]; do
                         serversDirectory="$2"
                         shift; shift
                         ;;
-                -v|--server-version)
-                        serverVersion="$2"
+                -e|--server-jar)
+                        serverJar="$2"
                         shift; shift
                         ;;
                 -s|--server)
@@ -74,8 +74,8 @@ Avaliable options:
     default: $serversDirectory
  -s --server [SERVER NAME]      Server to start.
     default: $server
- -v --server-version [VERSION]  Server version to use.
-    default: $serverVersion
+ -e --server-jar [FILENAME]     Server jar file. Must be in --jars-directory.
+    default: $serverJar
  -j --jars-directory [PATH]     Path to look for serve executables.
     default: $jarsDirectory
  --java-options [OPTIONS]       Additional java options.
@@ -108,10 +108,10 @@ EOF
         esac
 done
 
-check_for_file "$serversDirectory"
-check_for_file "$serversDirectory/$server"
+check_for_file "$serversDirectory" "no servers directory"
+check_for_file "$serversDirectory/$server" "no server folder"
 
-check_for_file "$jarsDirectory"
+check_for_file "$jarsDirectory" "no server java archive directory"
 
 check_uint "$startHeap" "--start-heap"
 check_uint "$maxHeap" "--max-heap"
@@ -119,8 +119,8 @@ if [ $startHeap -gt $maxHeap ]; then
 	fail "starting RAM size is larger that allowed size"
 fi
 
-jar="$(pwd)/$(find $jarsDirectory -name "*$serverVersion.jar" -print -quit)"
-check_for_file "$jar"
+jar="$jarsDirectory/$(basename "$serverJar" .jar)"
+check_for_file "$jar" "no server java archive"
 
 cd "$serversDirectory/$server"
 java -Xms"$startHeap"M -Xmx"$maxHeap"M $javaOptions -jar $jar $jarOptions
