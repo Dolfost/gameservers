@@ -119,7 +119,7 @@ if [ $startHeap -gt $maxHeap ]; then
 	fail "starting RAM size is larger that allowed size"
 fi
 
-jar="$jarsDirectory/$(basename "$serverJar" .jar)"
+jar="$jarsDirectory/$(basename "$serverJar" .jar).jar"
 check_for_file "$jar" "no server java archive"
 
 cd "$serversDirectory/$server"
