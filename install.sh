@@ -1,6 +1,6 @@
 #!/bin/sh 
 
-prg=(gsforward.sh minecraft/mcserver.sh)
+programs=(gsforward.sh minecraft/mcserver.sh)
 
 if [[ -d  "~/.local/bin" ]]; then
 	echo "Error: ~/.local/bin does not exist"
