@@ -110,7 +110,7 @@ Running sever is in <servers-directory>/<server>.
 Sever is at <jars-directory>/<server-jar>.
 
 You can add option defaults to ~/.mcserver.sh or 
-<root>/mcserver.sh in folder with defaults. 
+<root>/mcserver.sh in with options defaults. 
 They will be sourced with mentioned order.
 For example, to redefine default --start-heap 
 value to 2048, add
