@@ -92,7 +92,7 @@ Avaliable options:
  -j --jars-directory [PATH] def: $jarsDirectory
      Path to look for server executables.
      Should be in <root>/.
- -r --root [PATH] def: $jarsDirectory
+ -r --root [PATH] def: $root
      Path to server root folder. This folderscontains
      contains servers jar folders and servers itsef.
  --java-options [OPTIONS] def: $javaOptions
