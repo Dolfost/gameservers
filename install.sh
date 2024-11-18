@@ -1,6 +1,6 @@
 #!/bin/sh
 
-programs=("gsforward.sh" "minecraft/mcserver.sh")
+programs=("gsforward.sh" "minecraft/mcserver.sh" "dst/dstserver.sh")
 
 if [[ ! -d "$HOME/.local/bin" ]]; then
 	echo "Error: $HOME/.local/bin does not exist"
