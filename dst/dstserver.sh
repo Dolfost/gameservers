@@ -107,8 +107,8 @@ check_for_file "$dontstarve_dir/$cluster/cluster_token.txt"
 check_for_file "$dontstarve_dir/$cluster/Master/server.ini"
 check_for_file "$dontstarve_dir/$cluster/Caves/server.ini"
 
-check_for_file "$install_dir/bin64"
-cd "$install_dir/bin64" || fail
+check_for_file "$dstDir/bin64"
+cd "$dstDir/bin64" || fail
 
 run_shared=(./dontstarve_dedicated_server_nullrenderer_x64)
 run_shared+=(-persistent_storage_root "$root")
