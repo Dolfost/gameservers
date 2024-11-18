@@ -66,7 +66,6 @@ while [[ $# -gt 0 ]]; do
                 -h|--help)
                         cat << EOF
 USAGE: $0 [OPTIONS]
-
 Starts minecraft server
 
 Avaliable options:
