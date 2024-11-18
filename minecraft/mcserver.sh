@@ -44,7 +44,7 @@ while [[ $# -gt 0 ]]; do
 			serversDirectory="$2"
 			shift; shift
 			;;
-		-e|--server-jar)
+		-v|--server-jar)
 			serverJar="$2"
 			shift; shift
 			;;
@@ -87,7 +87,7 @@ Avaliable options:
  -s --server [FOLDER NAME] def: $server
      Server directory to start. 
      Should be in <root>/<servers-directory>/.
- -e --server-jar [FILENAME] def: $serverJar
+ -v --server-jar [FILENAME] def: $serverJar
      Server jar file. Must be in <root>/<jars-directory>.
  -j --jars-directory [PATH] def: $jarsDirectory
      Path to look for server executables.
