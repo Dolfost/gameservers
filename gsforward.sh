@@ -4,6 +4,7 @@ portFrom="25565"
 portTo="31415"
 subdomain="yoursub"
 localPort="<localport>"
+noSubdomain="no"
 
 programName="$0"
 
@@ -17,7 +18,7 @@ function fail() {
 }
 
 function check_port() {
-	if [[ ! $1 =~ ^[0-9]+$ ]] || [[ $1 -gt 65535 ]]; then
+	if [[ ! $1 =~ ^[0-9]+$ ]] || [[ $1 -gt 65535 ]] || [[ $1 -lt 1 ]]; then
 		fail "$1: $2: not a valid port"
 	fi
 	if [[ $1 -eq "80" ]]; then 
@@ -43,13 +44,17 @@ while [[ $# -gt 0 ]]; do
 			subdomain="$2"
 			shift; shift
 			;;
+		-n|--no-subdomain)
+			noSubdomain="$2"
+			shift; shift
+			;;
 		-h|--help)
 			cat << EOF
 USAGE: $0 [OPTIONS]
 Forward TCP traffic through serveo.net.
 
 Avaliable options:
- -p --port-from [PORT] def: $portFrom
+ -f --port-from [PORT] def: $portFrom
      Local port to forward.
  -t --port-to [PORT] def: $portTo
      Port to forward to <subdomain>.
@@ -57,6 +62,9 @@ Avaliable options:
      Subdomain of serveo.net to use.
  -l --local-port [PORT] def: $localPort
      Local port to show in final message.
+ -n --no-subdomain yes|no def: $noSubdomain
+     Don't use subdomain $subdomain, connect
+		 directly to serveo.net:$portTo.
  -h --help 
      Show this message.
 
@@ -89,12 +97,24 @@ done
 check_port "$portFrom" "--port-from"
 check_port "$portTo" "--port-to"
 
-cat << EOF
-If succesfull and sever is running on port $portFrom, 
-You can try to recieve it's traffic on other machine via:
-   ssh -L $localPort:$subdomain:$portTo serveo.net
-where $localPort is untaken local port. Have a nice game!
-
+	cat << EOF
+You can recieve traffic from $portFrom on other machine via:
 EOF
 
-ssh -R $subdomain:$portTo:localhost:$portFrom serveo.net
+if [ $noSubdomain = "no" ]; then
+	cat << EOF
+   ssh -L $localPort:$subdomain:$portTo serveo.net
+where $localPort is untaken port on other machine.
+EOF
+	ssh -R $subdomain:$portTo:localhost:$portFrom serveo.net
+else
+	cat << EOF
+   serveo.net:$portTo 
+EOF
+	ssh -R $portTo:localhost:$portFrom serveo.net
+fi
+
+cat << EOF 
+Have a nice game!
+
+EOF
