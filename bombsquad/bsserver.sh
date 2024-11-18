@@ -81,7 +81,7 @@ Avaliable options:
  -r --root [PATH] def: $root
      Path to server root folder. This folderscontains
      contains clients and servers folders.
- --client-options [OPTIONS] def: $clientOptions
+ -o --client-options [OPTIONS] def: $clientOptions
      Additional client options.
  -h --help                     
      Show this message.
@@ -121,5 +121,4 @@ check_for_file "$root/$clientsDirectory" "no server java archive directory"
 client="$root/$clientsDirectory/$serverClient/bombsquad_server"
 check_for_file "$client" "no server client executable \"$client[.jar]\""
 
-${client} "--config $root/$serversDirectory/$server/config.toml" \
-	"--root $root/$serversDirectory/$server/ba_root" "$clientOptions" 
+${client} "--config $root/$serversDirectory/$server/config.toml" "--root $root/$serversDirectory/$server/ba_root" "$clientOptions" 
