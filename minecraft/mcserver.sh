@@ -86,15 +86,15 @@ Avaliable options:
      Servers collection directory name in <root>/. 
  -s --server [FOLDER NAME] def: $server
      Server directory to start. 
-		 Should be in <root>/<servers-directory>/.
+     Should be in <root>/<servers-directory>/.
  -e --server-jar [FILENAME] def: $serverJar
      Server jar file. Must be in <root>/<jars-directory>.
  -j --jars-directory [PATH] def: $jarsDirectory
      Path to look for server executables.
-		 Should be in <root>/.
+     Should be in <root>/.
  -r --root [PATH] def: $jarsDirectory
-     Path to server root folder. This folder
-		 contains servers jar folders and servers itsef.
+     Path to server root folder. This folderscontains
+     contains servers jar folders and servers itsef.
  --java-options [OPTIONS] def: $javaOptions
      Additional java options.
  --jar-options [OPTIONS] def: $jarOptions
