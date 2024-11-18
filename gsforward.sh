@@ -105,16 +105,13 @@ if [ $noSubdomain = "no" ]; then
 	cat << EOF
    ssh -L $localPort:$subdomain:$portTo serveo.net
 where $localPort is untaken port on other machine.
+Have a nice game!
 EOF
 	ssh -R $subdomain:$portTo:localhost:$portFrom serveo.net
 else
 	cat << EOF
    serveo.net:$portTo 
+Have a nice game!
 EOF
 	ssh -R $portTo:localhost:$portFrom serveo.net
 fi
-
-cat << EOF 
-Have a nice game!
-
-EOF
