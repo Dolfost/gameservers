@@ -89,6 +89,11 @@ Avaliable options:
 Running sever is in <servers-directory>/<server>.
 Sever is at <clients-directory>/<server-client>.
 
+Script will try to copy 
+<root>/<clients-directory>/<server-client>/config.toml 
+to <root>/<servers-directory>/<server>/config.toml
+if it does not exists.
+
 You can add option defaults to ~/.bsserver.sh or 
 <root>/bsserver.sh in with options defaults. 
 They will be sourced with mentioned order.
@@ -120,6 +125,12 @@ check_for_file "$root/$clientsDirectory" "no server java archive directory"
 
 client="$root/$clientsDirectory/$serverClient/bombsquad_server"
 check_for_file "$client" "no server client executable \"$client[.jar]\""
+
+if [[ -e "$root/$serversDirectory/$server/conf.toml" ]]; then
+	echo "Copying conf.toml to '$server' server directory..."
+	cp "$root/$clientsDirectory/$serverClient/config.toml" \
+		"$root/$serversDirectory/$server/conf.toml"
+fi
 
 ${client} --config "$root/$serversDirectory/$server/config.toml" \
 	--root "$root/$serversDirectory/$server/ba_root" $clientOptions 
