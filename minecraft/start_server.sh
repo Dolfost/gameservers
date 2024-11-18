@@ -12,6 +12,10 @@ maxHeap="1024"
 
 programName="$0"
 
+if [ -e server.sh ]; then
+	source ./server.sh
+fi
+
 function fail() {
     echo "$programName: Error:" "$@" >&2
     exit 1
@@ -89,6 +93,12 @@ Avaliable options:
 
 Running sever is in <servers-directory>/<server>.
 Sever is at <jars-directory>/<server-jar>.
+
+You can add file server.sh with defaults.
+For example, to redefine default 
+--start-heap value to 2048, add
+   startHeap=2048
+to the server.sh.
 EOF
                         exit 0
                         ;;
