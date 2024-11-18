@@ -49,17 +49,16 @@ USAGE: $0 [OPTIONS]
 Forward TCP traffic through serveo.net.
 
 Avaliable options:
--p --port-from [PORT] def: $portFrom
-    Local port to forward.
-  
--t --port-to [PORT] def: $portTo
-    Port to forward to <subdomain>.
--d --subdomain [DOMEN] def: $subdomain
-    Subdomain of serveo.net to use.
--l --local-port [PORT] def: $localPort
-    Local port to show in final message.
--h --help 
-    Show this message.
+ -p --port-from [PORT] def: $portFrom
+     Local port to forward.
+ -t --port-to [PORT] def: $portTo
+     Port to forward to <subdomain>.
+ -d --subdomain [DOMEN] def: $subdomain
+     Subdomain of serveo.net to use.
+ -l --local-port [PORT] def: $localPort
+     Local port to show in final message.
+ -h --help 
+     Show this message.
 
 To recieve TCP traffic on other machine as localhost:<localport>, use:
 $ ssh -L <localport>:<subdomain>:<port-to> serveo.net
