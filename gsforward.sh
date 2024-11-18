@@ -11,10 +11,6 @@ if [ -e ~/.gsforward.sh ]; then
 	source ~/.gsforward.sh
 fi
 
-if [ -e gsforward.sh ]; then
-	source ./gsforward.sh
-fi
-
 function fail() {
 	echo "$programName: Error:" "$@" >&2
 	exit 1
@@ -53,26 +49,28 @@ USAGE: $0 [OPTIONS]
 Forward TCP traffic through serveo.net.
 
 Avaliable options:
--p --port-from [PORT]     Local port to forward.
-   default: $portFrom
--t --port-to [PORT]      	Port to forward to <subdomain>.
-   default: $portTo
--d --subdomain [DOMEN]    Subdomen of serveo.net to use.
-   default: $subdomain
--l --local-port [PORT]    Local port to show in final message.
-   default: $localPort
--h --help                 Show this message.
+-p --port-from [PORT] def: $portFrom
+    Local port to forward.
+  
+-t --port-to [PORT] def: $portTo
+    Port to forward to <subdomain>.
+-d --subdomain [DOMEN] def: $subdomain
+    Subdomain of serveo.net to use.
+-l --local-port [PORT] def: $localPort
+    Local port to show in final message.
+-h --help 
+    Show this message.
 
 To recieve TCP traffic on other machine as localhost:<localport>, use:
 $ ssh -L <localport>:<subdomain>:<port-to> serveo.net
 
-You can add and ~/.forward.sh to your home and
-forward.sh with defaults to current directory.
+You can add and ~/.forward.sh to your home 
+with option defaults.
 They will be souced in mentioned order.
 For example, to redefine default 
 --port-to value to 27182, add
    portTo=27182
-to the gsforward.sh or ~/.gsforward.sh.
+to the ~/.gsforward.sh.
 EOF
 			exit 0
 			;;
@@ -94,7 +92,7 @@ check_port "$portTo" "--port-to"
 
 cat << EOF
 If succesfull and sever is running on port $portFrom, 
-You can try to recieve it's traffic via:
+You can try to recieve it's traffic on other machine via:
    ssh -L $localPort:$subdomain:$portTo serveo.net
 where $localPort is untaken local port. Have a nice game!
 
