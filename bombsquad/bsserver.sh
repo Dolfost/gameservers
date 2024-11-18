@@ -126,7 +126,7 @@ check_for_file "$root/$clientsDirectory" "no server java archive directory"
 client="$root/$clientsDirectory/$serverClient/bombsquad_server"
 check_for_file "$client" "no server client executable \"$client[.jar]\""
 
-if [ ! -e "$root/$serversDirectory/$server/confifg.toml" ]; then
+if [[ ! -e "$root/$serversDirectory/$server/confifg.toml" ]]; then
 	echo "Copying conf.toml to '$server' server directory..."
 	cp "$root/$clientsDirectory/$serverClient/config.toml" \
 		"$root/$serversDirectory/$server/config.toml"
