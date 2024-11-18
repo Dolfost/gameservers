@@ -10,6 +10,12 @@ fi
 for prg in "${programs[@]}"; do
 	from="$(pwd)/$prg"
 	to="$HOME/.local/bin/$(basename $prg .sh)"
+
+	if [ -e "$to" ]; then 
+		echo "skipping $from -> $to"
+		continue
+	fi
+
 	echo "linking $from to $to"
 	ln -s "$from" "$to"
 	chmod +x "$to"
