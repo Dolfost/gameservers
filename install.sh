@@ -1,12 +1,13 @@
-#!/bin/sh 
+#!/bin/sh
 
-programs=(gsforward.sh minecraft/mcserver.sh)
+programs=("gsforward.sh" "minecraft/mcserver.sh")
 
-if [[ -d  "~/.local/bin" ]]; then
-	echo "Error: ~/.local/bin does not exist"
+if [[ ! -d "$HOME/.local/bin" ]]; then
+	echo "Error: $HOME/.local/bin does not exist"
+	exit 1
 fi
 
 for prg in "${programs[@]}"; do
-	echo "linking ${pwd}/$prg to ~/.local/bin/${basename ${prg}}"
-	ln -s "${pwd}/$prg" "~/.local/bin/${basename ${prg}}"
+	echo "linking $(pwd)/$prg to $HOME/.local/bin/$(basename $prg)"
+	ln -s "$(pwd)/$prg" "$HOME/.local/bin/$(basename $prg)"
 done
