@@ -8,6 +8,9 @@ if [[ ! -d "$HOME/.local/bin" ]]; then
 fi
 
 for prg in "${programs[@]}"; do
-	echo "linking $(pwd)/$prg to $HOME/.local/bin/$(basename $prg)"
-	ln -s "$(pwd)/$prg" "$HOME/.local/bin/$(basename $prg)"
+	from="$(pwd)/$prg"
+	to="$HOME/.local/bin/$(basename $prg .sh)"
+	echo "linking $from to $to"
+	ln -s "$from" "$to"
+	chmod +x "$to"
 done
