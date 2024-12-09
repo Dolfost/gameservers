@@ -69,10 +69,10 @@ Avaliable options:
      Local port to show in final message.
  -n --no-subdomain yes|no def: $noSubdomain
      Don't use subdomain $subdomain, connect
-		 directly to serveo.net:$portTo.
+     directly to serveo.net:$portTo.
  -w --wait-connection
      Instead of connectiong, try to connect 
-		 every 2 seconds and beep when serveo.net is avaliable.
+     every 2 seconds and beep when serveo.net is avaliable.
  -h --help 
      Show this message.
 
