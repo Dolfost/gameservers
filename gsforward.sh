@@ -5,6 +5,7 @@ portTo="31415"
 subdomain="yoursub"
 localPort="<localport>"
 noSubdomain="no"
+waitConnection="no"
 
 programName="$0"
 
@@ -48,6 +49,10 @@ while [[ $# -gt 0 ]]; do
 			noSubdomain="$2"
 			shift; shift
 			;;
+		-w|--wait-connection)
+			waitConnection="yes"
+			shift; shift
+			;;
 		-h|--help)
 			cat << EOF
 USAGE: $0 [OPTIONS]
@@ -65,6 +70,9 @@ Avaliable options:
  -n --no-subdomain yes|no def: $noSubdomain
      Don't use subdomain $subdomain, connect
 		 directly to serveo.net:$portTo.
+ -w --wait-connection
+     Instead of connectiong, try to connect 
+		 every 2 seconds and beep when serveo.net is avaliable.
  -h --help 
      Show this message.
 
@@ -97,21 +105,38 @@ done
 check_port "$portFrom" "--port-from"
 check_port "$portTo" "--port-to"
 
-	cat << EOF
+
+if [ $noSubdomain = "no" ]; then
+	address="$subdomain:$portTo:localhost:$portFrom" 
+else
+	address="$portTo:localhost:$portFrom" 
+fi
+
+cat << EOF
 You can recieve traffic from $portFrom on other machine via:
 EOF
-
 if [ $noSubdomain = "no" ]; then
 	cat << EOF
    ssh -L $localPort:$subdomain:$portTo serveo.net
 where $localPort is untaken port on other machine.
-Have a nice game!
 EOF
-	ssh -R $subdomain:$portTo:localhost:$portFrom serveo.net
 else
 	cat << EOF
    serveo.net:$portTo 
-Have a nice game!
 EOF
-	ssh -R $portTo:localhost:$portFrom serveo.net
+fi
+echo "Have a nice game!"
+
+command="ssh -R $address serveo.net"
+
+if [ "$waitConnection" = "yes" ]; then
+	echo "Waiting for valid connection..."
+	until timeout 3 $command; do
+		echo "Retrying connection..."
+		sleep 1
+	done
+	echo "Connection established!"	
+	beep -f 1000 -l 300 -D50 -n -f 1500 -l 200 -D 50 -n -f 1000 -l 300
+else
+	$command
 fi
