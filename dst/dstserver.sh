@@ -156,7 +156,7 @@ fi
 
 if [[ "$update_mods" == "yes" ]]; then
 	status "Updating '$cluster' cluster mods on '$shard' shard"
-	"${run_shared[@]}" -only_update_server_mods
+	"${run_shared[@]}" - only_update_server_mods | sed "s/^/$shard:  /"
 	if [[ "$?" -eq "0" ]]; then 
 		status "Updating mods finished!"
 	else
