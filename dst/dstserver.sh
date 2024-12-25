@@ -140,17 +140,17 @@ if [[ "$update" == "yes" ]]; then
 		+force_install_dir "$dstDir" \ 
 		+app_update 343050 validate +quit
 	if [[ "$?" -eq "0" ]]; then 
-		status("Updating dst client finished!")
+		status "Updating dst client finished!"
 	else
-		status("Updating dst client failed!")
+		status "Updating dst client failed!"
 		code="1"
 	fi
 
 	"${run_shared[0]}" -only_update_server_mods
 	if [[ "$?" -eq "0" ]]; then 
-		status("Updating server mods finished!")
+		status "Updating server mods finished!"
 	else
-		status("Updating server mods failed!")
+		status "Updating server mods failed!"
 		code="1"
 	fi
 	exit $code
