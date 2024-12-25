@@ -42,11 +42,11 @@ while [[ $# -gt 0 ]]; do
 			;;
 		-u|--update-client)
 			update_client="yes"
-			shift; shift
+			shift
 			;;
 		-U|--update-mods)
 			update_mods="yes"
-			shift; shift
+			shift
 			;;
 		-o|--server-option)
 			additional+=(" $2")
