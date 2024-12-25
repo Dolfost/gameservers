@@ -134,9 +134,9 @@ run_shared+=("$additional")
 # update
 if [[ "$update" == "yes" ]]; then 
 	code="0"
-	echo " -- Updating dst client and server mods"
-	steamcmd +@ShutdownOnFailedCommand \ 
-		1 +@NoPromptForPassword 1 +login anonymous \
+	status "Updating dst client and server mods"
+	steamcmd +@ShutdownOnFailedCommand 1 \ 
+		+@NoPromptForPassword 1 +login anonymous \
 		+force_install_dir "$dstDir" \ 
 		+app_update 343050 validate +quit
 	if [[ "$?" -eq "0" ]]; then 
