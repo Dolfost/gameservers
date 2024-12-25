@@ -4,7 +4,8 @@ root="$(pwd)"
 clustersDir="clusters" 
 cluster="dcluster"
 shard="Master"
-update="no"
+update_client="no"
+update_mods="no"
 additional=("-console")
 dstDir="$HOME/steamapps/DST"
 # additional=("-offline -disabledatacollection -console")
@@ -39,8 +40,12 @@ while [[ $# -gt 0 ]]; do
 			dstDir="$2"
 			shift; shift
 			;;
-		-u|--update)
-			update="yes"
+		-u|--update-client)
+			update_client="yes"
+			shift; shift
+			;;
+		-U|--update-mods)
+			update_mods="yes"
 			shift; shift
 			;;
 		-o|--server-option)
@@ -65,8 +70,10 @@ Available options:
     Clusters home directory.
 -i --dst-dir [PATH] def: $dstDir
     Don't Starve Together installation directory.
--u --update 
-    Update dst client and <cluster> mods.
+-u --update-client
+    Update dst client.
+-U --update-mods
+    Update selected shard mods
 -h --help
     Show this message.
 
@@ -114,7 +121,7 @@ function check_for_file() {
 }
 
 check_for_file "$dontstarve_dir"
-if [[ "$update" == "no" ]]; then
+if [[ "$update_client" == "no" ]]; then
 	check_for_file "$dontstarve_dir/$cluster/cluster.ini"
 	check_for_file "$dontstarve_dir/$cluster/cluster_token.txt"
 	check_for_file "$dontstarve_dir/$cluster/Master/server.ini"
@@ -130,11 +137,11 @@ run_shared+=(-cluster "$cluster")
 run_shared+=(-conf_dir "$clustersDir")
 run_shared+=(-monitor_parent_process $$)
 run_shared+=("$additional")
+run_shared+=("-shard $shard")
 
 # update
-if [[ "$update" == "yes" ]]; then 
-	code="0"
-	status "Updating dst client and server mods"
+if [[ "$update_client" == "yes" ]]; then 
+	status "Updating dst client"
 	steamcmd +@ShutdownOnFailedCommand 1 \
 		+@NoPromptForPassword 1 +login anonymous \
 		+force_install_dir "$dstDir" \
@@ -143,17 +150,19 @@ if [[ "$update" == "yes" ]]; then
 		status "Updating dst client finished!"
 	else
 		status "Updating dst client failed!"
-		code="1"
 	fi
-
-	"${run_shared[0]}" -only_update_server_mods
-	if [[ "$?" -eq "0" ]]; then 
-		status "Updating server mods finished!"
-	else
-		status "Updating server mods failed!"
-		code="1"
-	fi
-	exit $code
-else # just run server
-	"${run_shared[@]}" -shard $shard | sed "s/^/$shard:  /"
+	exit $?
 fi
+
+if [[ "$update_mods" == "yes" ]]; then
+	status "Updating '$cluster' cluster mods on '$shard' shard"
+	"${run_shared[@]}" -only_update_server_mods
+	if [[ "$?" -eq "0" ]]; then 
+		status "Updating mods finished!"
+	else
+		status "Updating mods failed!"
+	fi
+	exit $?
+fi
+
+"${run_shared[@]}" | sed "s/^/$shard:  /"
