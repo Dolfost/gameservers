@@ -51,7 +51,7 @@ while [[ $# -gt 0 ]]; do
 			;;
 		-w|--wait-connection)
 			waitConnection="yes"
-			shift; shift
+			shift;
 			;;
 		-h|--help)
 			cat << EOF
@@ -131,7 +131,7 @@ command="ssh -R $address serveo.net"
 
 if [ "$waitConnection" = "yes" ]; then
 	echo "Waiting for valid connection..."
-	until timeout 3 $command; do
+	until timeout 3 $command -fTN; do
 		echo "Retrying connection..."
 		sleep 1
 	done
