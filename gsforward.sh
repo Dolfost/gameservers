@@ -79,7 +79,7 @@ Avaliable options:
 To recieve TCP traffic on other machine as localhost:<localport>, use:
 $ ssh -L <localport>:<subdomain>:<port-to> serveo.net
 
-You can add and ~/.forward.sh to your home 
+You can add and ~/.gsforward.sh to your home 
 with option defaults.
 They will be souced in mentioned order.
 For example, to redefine default 
