@@ -4,9 +4,9 @@ serversDirectory="servers"
 server="dserver"
 
 root=$(pwd)
-executableDirectory="minecraft_1.21.3"
-executablesDirectory=""
-config="config.txt"
+executableDirectory='mb_warband_dedicated_1174/Mount&Blade Warband Dedicated'
+executablesDirectory="server_files"
+config="Sample_Deathmatch.txt"
 
 programName="$0"
 
