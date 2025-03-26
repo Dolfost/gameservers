@@ -67,7 +67,7 @@ Avaliable options:
      Server directory to start. 
      Should be in <root>/<servers-directory>/.
  -e --executable-directory [FILENAME] def: $executableDirectory
-     Server jar file. Must be in <root>/<jars-directory>.
+     Server directory with .exe file. Must be in <root>/<executables-directory>.
  -E --executables-directory [PATH] def: $executablesDirectory
      Path to look for server executables folders.
      Should be in <root>/.
@@ -75,8 +75,8 @@ Avaliable options:
      Path to the config.
      Should be in <root>/<servers-directory>/<server>.
  -r --root [PATH] def: $root
-     Path to server root folder. This folderscontains
-     contains servers jar folders and servers itsef.
+     Path to server root folder. This directory contains
+     contains server files directories and servers itsef.
  -h --help                     
      Show this message.
 
@@ -109,7 +109,7 @@ check_for_file "$root/$serversDirectory/$server/$config" "no config"
 
 check_for_file "$root/$executablesDirectory" "no server executables directory"
 
-exe="$root/$executablesDirectory/$(basename "$executableDirectory")/mb_warband_dedicated.exe"
+exe="$root/$executablesDirectory/$executableDirectory/mb_warband_dedicated.exe"
 check_for_file "$exe" "no server executable \"$executableDirectory\""
 
 cd "$root/$serversDirectory/$server"
