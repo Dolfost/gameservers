@@ -5,6 +5,7 @@ programs=(
 	"minecraft/mcserver.sh" 
 	"dst/dstserver.sh"
 	"bombsquad/bsserver.sh"
+	"/mount_and_blade_warband/mbwbserver.sh"
 )
 
 if [[ ! -d "$HOME/.local/bin" ]]; then
