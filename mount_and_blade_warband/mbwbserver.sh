@@ -113,4 +113,4 @@ exe="$root/$executablesDirectory/$executableDirectory/mb_warband_dedicated.exe"
 check_for_file "$exe" "no server executable \"$executableDirectory\""
 
 cd "$root/$serversDirectory/$server"
-wineconsole exe "$root/$executablesDirectory/$executableDirectory/mb_warband_dedicated.exe" -r "$root/$serversDirectory/$server/$config"
+wineconsole $exe "$root/$executablesDirectory/$executableDirectory/mb_warband_dedicated.exe" -r "$root/$serversDirectory/$server/$config"
